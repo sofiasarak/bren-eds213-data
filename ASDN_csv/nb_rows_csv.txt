@@ -1,0 +1,8 @@
+     17 site.csv
+     21 color_band_code.csv
+    100 species.csv
+    270 personnel.csv
+    442 ASDN_Camp_assignment.csv
+  22632 snow_survey_fixed.csv
+  27937 ASDN_Snow_survey.csv
+  51419 total
