@@ -1,0 +1,80 @@
+---
+title: "dbplyr"
+format: html
+---
+
+```{r}
+library(tidyverse)
+library(DBI)
+library(duckdb)
+library(dplyr)
+```
+## Connecting to a database
+```{r}
+conn <- DBI::dbConnect(duckdb::duckdb(),
+                       dbdir = "database/database.duckdb")
+
+conn
+```
+
+
+```{r}
+DBI::dbListTables(conn)
+```
+
+
+```{r}
+species <- tbl(conn, "Species")
+species
+```
+
+
+```{r}
+species_a <- dbGetQuery(conn, "SELECT * FROM Species WHERE Code LIKE 'a%'")
+
+species_a # small enough where it can return a real df for us
+```
+
+## DBplyr
+```{r}
+species %>% 
+  filter(Relevance == "Study species") %>% 
+  select(Code, Scientific_name) %>% # some sort of operation that i did not finish :p
+  
+```
+
+Let's do a groupby summarize
+```{r}
+species %>% 
+  group_by(Relevance) %>% 
+  summarize (num_species = n()) %>% 
+ #  show_query() 
+  collect()
+```
+
+Let's do a mutate
+```{r}
+species %>% 
+  mutate(Xcode = paste("X_", Code)) %>% 
+  show_query() 
+# collect(0) # returns a table with results
+```
+
+Let's do a join
+```{r}
+eggs_do <- tbl(conn, "Bird_eggs")
+nest_db <- tbl(conn, "Bird_nests")
+```
+
+```{r}
+nest_eggs_df <- nest_db %>% 
+  left_join(egg_db, by="Nest_ID", keep = FALSE) %>%  # don't keep uncommon columns
+  head(S) %>% 
+  show_query()
+```
+
+## Closing the connection!!
+```{r}
+DBI::dbDisconnect(conn, shutdown = TRUE)
+```
+
