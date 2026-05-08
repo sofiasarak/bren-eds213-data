@@ -1,0 +1,55 @@
+Week 5, Assignment 2
+Sofia Sarak
+
+Responses:
+
+Question 1
+
+All of these bash commands return the same thing – a list containing the subdirectory's contents:
+
+a.csv  b.csv  c.csv  d.csv  e.csv
+
+This list is returned because the `ls` command on its own references the current directory, and the period in `ls .` is shorthand for where I currently am in the system, or the current directory. Finally, the third option returns the same list because it is returning what is in the variable (pwd)/../for_bash_essentials. It knows that it is a variable because of the $ and to print it exactly because it is enclosed by "". (pwd)/../for_bash_essentials itself translates to the working directory that we are in – for_bash_essentials – which is why it again lists the same thing as before!
+
+Question 2
+
+cat *.csv | wc -l
+
+The second option only returns the total, because what is getting piped into it is the concatenated .csv files. It calculates the line count for the concatenated data and therefore returns the summed value.
+
+Question 3
+
+cat *.csv | wc -l a.csv
+
+Only prints the word count of the file a.csv. This is because the concatenated .csv files do retain their identification, so referencing a specific one would return the line count just from that one (as opposed to the sum).
+
+Question 4
+
+"${name}_Howard"
+
+Question 5
+
+$1 =  a.csv
+$# =  5
+
+The script sees multiple arguments because of the * in front of .csv. It tells it to use all of the files, or variables, in the directory that end with .csv.
+
+Question 6
+
+$1 =  Thu May 7 05:57:08 UTC 2026
+$3 =  May
+
+Question 7
+
+"sort junk_file.txt > junk_file.txt" replaces everything in junk_file.txt with nothing. This occurs because > is destructive. In preparation, bash overwrites the file before the sort operation even begins, which means that bash has nothing to sort, and therefore emptiness replaces the lines in junk_file.txt.
+
+You can sort the lines by doing the following:
+
+cp junk_file.txt new_file.txt       # copy the junk file to a new file
+sort new_file.txt > junk_file.txt   # sort that version, and reassign it to the original junk file
+
+
+Question 8
+
+* references everything in the directory, so this commands removes all files. Bash also thinks that you are trying to remove everything AND a file called .csv (because you are listing * .csv), and it will return an error saying that there is no such file .csv in the directory.
+

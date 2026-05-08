@@ -1,0 +1,4 @@
+Week 5, Assignment 3, Part 2
+Sofia Sarak
+
+I used 1000 repetitions to get good timings, and the outer join was the fastest operation.

@@ -1,0 +1,2 @@
+echo "yo ho a line of text" > junk_file.txt
+echo "another line" >> junk_file.txt
